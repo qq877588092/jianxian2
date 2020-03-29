@@ -26,7 +26,7 @@ export default[
   {
     key:'3',
     title:"商品管理",
-    icon:'goods',
+    icon:'shop',
     path:'/admin/goods',
     children:[
       {
@@ -44,7 +44,7 @@ export default[
   {
     key:'4',
     title:"数据统计",
-    icon:'echarts',
+    icon:'dashboard',
     path:'/admin/echarts',
     children:[
       {
@@ -67,13 +67,13 @@ export default[
   {
     key:'8',
     title:"管理员",
-    icon:'administrator',
+    icon:'robot',
     path:'/admin/administrator'
   },
   {
     key:'9',
     title:"设置",
-    icon:'set',
+    icon:'setting',
     path:'/admin/set'
   },
 ]
