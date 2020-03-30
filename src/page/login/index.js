@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './login.css'
 import loginApi from '../../api/login'
+import { Button, notification } from 'antd'
+import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 class Login extends Component {
   constructor() {
@@ -10,9 +12,26 @@ class Login extends Component {
       password: ''
     }
   }
-  login() {
+  login = async () => {
     let { userName, password } = this.state
-    loginApi.Login(`userName=${userName}&password=${password}`)
+    let result = await loginApi.Login(
+      `userName=${userName}&password=${password}`
+    )
+    console.log(result)
+    if (result.token) {
+      localStorage.setItem('token',result.token)
+      // antd 的插件消息提示
+      notification['success']({
+        duration: 2.5,
+        message: result.msg,
+        description: userName + '，欢迎您的使用，3秒后将自动跳转到首页' 
+      })
+      setTimeout(() => {
+        this.props.history.replace('/admin')
+      }, 2500);
+    } else {
+      alert(result.msg)
+    }
   }
   render() {
     let { userName, password } = this.state
@@ -76,4 +95,4 @@ class Login extends Component {
     )
   }
 }
-export default Login
+export default withRouter(Login)
